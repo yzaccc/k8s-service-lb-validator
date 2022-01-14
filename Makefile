@@ -12,7 +12,7 @@ test: ## Runs tests locally
 	go test -v ./tests
 
 summary: ## Summarize tests
-	gotestsum --format testname --hide-summary=skipped -- ./tests/...
+	gotestsum --format testname --hide-summary=skipped -- ./tests/... $(OPTIONS)
 
 build: ## Build tests in a binary
 	go test -v -c -o svc-test ./tests
@@ -35,6 +35,9 @@ sonobuoy-retrieve: ## Retrieve results from sonobuoy plugin
 
 clean: ## Clean up sonobuoy results and output binary
 	rm -rf results *_sonobuoy_* svc-test
+
+report:
+	go run ./cmd/aggregator/main.go
 
 ##@ Verify
 
